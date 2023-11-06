@@ -6,14 +6,12 @@ import 'package:geocoding/geocoding.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mini_weather/weather.dart';
 import 'package:mini_weather/weather_service.dart';
+import 'package:mini_weather/constants.dart';
 
 class WeatherPage extends StatefulWidget {
-  final String apiKey;
-
-  const WeatherPage({super.key, required this.apiKey});
+  const WeatherPage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _WeatherPageState createState() => _WeatherPageState();
 }
 
@@ -25,7 +23,7 @@ class _WeatherPageState extends State<WeatherPage> {
   @override
   void initState() {
     super.initState();
-    _weatherService = WeatherService(apiKey: widget.apiKey);
+    _weatherService = WeatherService(apiKey: Constants.apiKey);
     _getCurrentCity();
   }
 
@@ -83,6 +81,7 @@ class _WeatherPageState extends State<WeatherPage> {
       appBar: AppBar(
         title: const Text('Mini Weather 🌦️'),
         elevation: 0.0,
+        backgroundColor: Constants.primaryColor,
       ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -97,39 +96,44 @@ class _WeatherPageState extends State<WeatherPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SvgPicture.asset(
-                      'assets/icons/location.svg',
+                      Constants.locationIcon,
                       height: 24,
+                      color: Constants.primaryColor,
                     ),
                     const SizedBox(width: 20),
                     Text(
                       _currentCity ?? 'Loading City...',
-                      style: const TextStyle(fontSize: 24),
+                      style: const TextStyle(
+                          fontSize: 24, color: Constants.primaryColor),
                     ),
                   ],
                 ),
                 if (_weather != null) ...[
                   Lottie.asset(
                     _getWeatherAnimation(_weather!.mainCondition),
-                    width: 250,
-                    height: 250,
+                    width: 300,
+                    height: 300,
                     fit: BoxFit.fill,
+                  ),
+                  Text(
+                    _weather!.mainCondition,
+                    style: const TextStyle(
+                        fontSize: 20, color: Constants.primaryColor),
                   ),
                   Column(
                     children: <Widget>[
                       Text(
                         '${kelvinToCelsius(_weather!.temperature).toStringAsFixed(1)} °C',
-                        style: const TextStyle(fontSize: 36),
+                        style: const TextStyle(
+                            fontSize: 30, color: Constants.primaryColor),
                       ),
                       SizedBox(height: 20),
                       Text(
                         '${(_weather!.temperature * 9 / 5 - 459.67).toStringAsFixed(1)} °F',
-                        style: const TextStyle(fontSize: 36),
+                        style: const TextStyle(
+                            fontSize: 30, color: Constants.primaryColor),
                       ),
                     ],
-                  ),
-                  Text(
-                    _weather!.mainCondition,
-                    style: const TextStyle(fontSize: 24),
                   ),
                   SizedBox(
                     height: 20,
@@ -146,15 +150,21 @@ class _WeatherPageState extends State<WeatherPage> {
   String _getWeatherAnimation(String mainCondition) {
     switch (mainCondition.toLowerCase()) {
       case 'clouds':
-        return 'assets/cloud.json';
+        return Constants.cloudAnimation;
       case 'rain':
+        return Constants.rainAnimation;
       case 'drizzle':
+        return Constants.rain2Animation;
       case 'showers':
-        return 'assets/rain.json';
+        return Constants.shower_rainAnimation;
       case 'thunderstorm':
-        return 'assets/thunderstorm.json';
+        return Constants.thunderstormAnimation;
+      case 'snow':
+        return Constants.snowAnimation;
+      case 'mist':
+        return Constants.mistAnimation;
       default:
-        return 'assets/sunny.json'; // Default animation
+        return Constants.sunnyAnimation; // Default animation
     }
   }
 

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'weather_page.dart';
+import 'package:mini_weather/weather_page.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final String apiKey = 'f527c7539329312237a3e58b621be5f5';
-
   const MyApp({super.key});
 
   @override
@@ -17,8 +15,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Color.fromARGB(255, 233, 235, 236),
       ),
-      home: WeatherPage(apiKey: apiKey),
+      home: WeatherPage(),
     );
   }
 }

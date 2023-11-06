@@ -1,6 +1,5 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'package:mini_weather/weather.dart';
 
 class WeatherService {
