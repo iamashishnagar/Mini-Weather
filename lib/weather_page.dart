@@ -90,7 +90,7 @@ class _WeatherPageState extends State<WeatherPage> {
             height: MediaQuery.of(context).size.height -
                 AppBar().preferredSize.height,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

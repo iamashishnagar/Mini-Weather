@@ -63,7 +63,7 @@ flutter_icons:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/
+    - assets/animations/
     - assets/icons/
 
   # The following line ensures that the Material Icons font is
